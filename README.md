@@ -28,6 +28,6 @@ Tweak allows the user to create an account and log into their account at any tim
 2. discover, the user can view other users’ life hacks
 
 **The other functionalities are:**
-3.update, the user can edit their data 
-4.delete, the user can remove their data
-5.like, the user can add their favorite life hacks to a list
+3. update, the user can edit their data 
+4. delete, the user can remove their data
+5. like, the user can add their favorite life hacks to a list
