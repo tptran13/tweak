@@ -24,10 +24,10 @@ in their home to hack their way through life.
 Tweak allows the user to create an account and log into their account at any time.
 
 **The two primary functions are:**
-1. insert, the user can upload their life hacks as text, image, or video
-2. discover, the user can view other users’ life hacks
+- insert, the user can upload their life hacks as text, image, or video
+- discover, the user can view other users’ life hacks
 
 **The other functionalities are:**
-3. update, the user can edit their data 
-4. delete, the user can remove their data
-5. like, the user can add their favorite life hacks to a list
+- update, the user can edit their data 
+- delete, the user can remove their data
+- like, the user can add their favorite life hacks to a list
