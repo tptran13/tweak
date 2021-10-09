@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="http://www.thymleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Profile</title>
+    </head>
+    <body>
+        <h1>Tweak</h1>
+        <h3>Create Your Profile</h3>
+        <br><br>
+
+        <form th:action="@{/createprofile}" th:object="${newProfile}" method="post">
+            <label for="firstname">First Name:</label>
+            <input id="firstname" type="text" th:field="*{firstName}">
+
+            <label for="lastname">Last Name:</label>
+            <input id="lastname" type="text" th:field="*{lastName}">
+            <br><br>
+
+            <label for="birthday">Date of Birth:</label>
+            <input id="birthday" type="text" th:field="*{dateOfBirth}" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" placeholder="MM/DD/YYYY">
+            <br><br>
+
+            <label for="username">Username:</label>
+            <input id="username" type="text" th:field="*{username}" pattern="[a-zA-Z0-9].{6,}">
+            <br>
+            <small><em>(Username can only contain lowercase letters, uppercase letters, numbers, and at least 6 or more characters)</em></small>
+            <br><br>
+
+            <label for="password">Password:</label>
+            <input id="password" type="text" th:field="*{password}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+            <br>
+            <small><em>(Password must contain at least one number, one uppercase, lowercase letter, and at least 8 or more characters)</em></small>
+            <br><br>
+
+            <label for="email">Email:</label>
+            <input id="email" type="text" th:field="*{email}" placeholder="you@example.com">
+            <br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
