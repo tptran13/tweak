@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">    <!--thymeleaf namespace-->
     <head>
-        <meta charset="UTF-8">
+        <th:block th:insert="fragments/base :: headAttributes"></th:block>
         <title>Tweak</title>
     </head>
     <body>
-        <h1>Tweak</h1>
-        <p>Ready to Hack Your Way Through Life</p>
+        <div th:insert="fragments/base :: header"></div>
+        <h3>Ready to Hack Your Way Through Life</h3>
+        <hr>
+        <div th:insert="fragments/base :: footer"></div>
     </body>
+    <th:block th:replace="fragments/base :: scripts"></th:block>
 </html>

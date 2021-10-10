@@ -29,6 +29,6 @@ public class CreateProfileController
         System.out.println("Password: " + profile.getPassword());
         System.out.println("Email: " + profile.getEmail());
 
-        return "redirect:/indexpage";
+        return "redirect:/";
     }
 }
