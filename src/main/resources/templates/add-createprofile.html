@@ -12,30 +12,30 @@
 
         <form th:action="@{/createprofile}" th:object="${newProfile}" method="post">
             <label for="firstname">First Name:</label>
-            <input id="firstname" type="text" th:field="*{firstName}">
+            <input id="firstname" type="text" th:field="*{firstName}" required>
 
             <label for="lastname">Last Name:</label>
-            <input id="lastname" type="text" th:field="*{lastName}">
+            <input id="lastname" type="text" th:field="*{lastName}" required>
             <br><br>
 
             <label for="birthday">Date of Birth:</label>
-            <input id="birthday" type="date" th:field="*{dateOfBirth}" placeholder="MM/DD/YYYY">
+            <input id="birthday" type="date" th:field="*{dateOfBirth}" placeholder="MM/DD/YYYY" required>
             <br><br>
 
             <label for="username">Username:</label>
-            <input id="username" type="text" th:field="*{username}" pattern="[a-zA-Z0-9].{6,}">
+            <input id="username" type="text" th:field="*{username}" pattern="[a-zA-Z0-9].{6,}" required>
             <br>
             <small><em>(Username can only contain lowercase letters, uppercase letters, at least 1 number, and least 6 or more characters)</em></small>
             <br><br>
 
             <label for="password">Password:</label>
-            <input id="password" type="password" th:field="*{password}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+            <input id="password" type="password" th:field="*{password}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
             <br>
             <small><em>(Password must contain at least one number, uppercase letter, lowercase letter, and at least 8 or more characters)</em></small>
             <br><br>
 
             <label for="email">Email:</label>
-            <input id="email" type="email" th:field="*{email}" placeholder="you@example.com">
+            <input id="email" type="email" th:field="*{email}" placeholder="you@example.com" required>
             <br><br>
 
             <input type="submit" value="Submit">
@@ -45,4 +45,5 @@
             <div th:insert="fragments/base :: footer"></div>
         </form>
     </body>
+    <th:block th:replace="fragments/base :: scripts"></th:block>
 </html>
