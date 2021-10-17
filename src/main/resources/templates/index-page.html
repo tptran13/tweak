@@ -5,9 +5,10 @@
         <title>Tweak</title>
     </head>
     <body>
+        <div th:insert="fragments/base :: navigation"></div>
         <div th:insert="fragments/base :: header"></div>
         <h3>Ready to Hack Your Way Through Life</h3>
-        <hr>
+
         <div th:insert="fragments/base :: footer"></div>
     </body>
     <th:block th:replace="fragments/base :: scripts"></th:block>
