@@ -17,10 +17,10 @@
             <!-- Container wrapper -->
             <div class="container-fluid">
                 <!-- Navbar brand -->
-                <a class="navbar-brand" th:href="@{/}"><img id="logo" th:src="@{/images/tweak_logo.png}" class="roun"></a>
+                <a class="navbar-brand" th:href="@{/}"><img id="logo" th:src="@{/images/tweak_logo.png}" class="rounded"></a>
 
                 <!-- Toggle button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarContent"
                         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
                         <span class="navbar-toggler-icon"></span>
                 </button>
@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <!-- Left links -->
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/'}">
                             <a class="nav-link" th:href="@{/}">Home</a>
                         </li>
                     </ul>
@@ -38,8 +38,8 @@
                     <form class="d-flex align-items-center w-75 form-search">
                         <div class="input-group">
                             <button class="btn btn-light dropdown-toggle shadow-0" type="button" data-toggle="dropdown"
-                                    aria-expanded="false">Categories</button>
-                                <ul class="dropdown-menu">
+                                    aria-expanded="false" id="dropdownMenuButton">Categories</button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li>
                                         <a class="dropdown-item">All</a>
                                     </li>
@@ -68,11 +68,14 @@
                     </form>
 
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == 'createprofile'}">
                             <a class="nav-link" th:href="@{/createprofile}">Sign Up</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item"> <!--th:classappend="${#request.getServletPath() == '/'}"-->
                             <a class="nav-link">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Account</a>
                         </li>
                     </ul>
                 </div>
@@ -85,16 +88,15 @@
             <div class="container-fluid">
                 <div class="row justify-content-center mt-2 mb-2">
                     <div class="col-12">
-                        <h1 class="text-center">Tweak</h1>
+                        <h1 class="text-center" style="font-family: Brush Script MT, serif; font-size: 60px;">Tweak</h1>
                     </div>
                 </div>
             </div>
         </div>
 
         <footer class="site-footer" th:fragment="footer">
-            <hr>
             <div class="container text-center">
-                <span class="text-muted">Tho Tran @ Copyright 2021</span>
+                <div class="text-muted mt-2">Tho Tran @ Copyright 2021</div>
             </div>
         </footer>
     </body>

@@ -7,30 +7,52 @@
         <title>Create Your Hack</title>
     </head>
     <body>
+        <div th:insert="fragments/base :: navigation"></div>
         <div th:insert="fragments/base :: header"></div>
-        <h3>Create Your Life Hack</h3>
 
         <form th:action="@{/createpost}" th:object="${addPost}" method="post">
-            <label for="title">Title:</label>
-            <input id="title" type="text" th:field="*{title}" required>
-            <br><br>
-
-            <label for="date">Date Created:</label>
-            <input id="date" type="date" th:field="*{date}" required>
-            <br><br>
-
-            <label for="description">Description:</label>
-            <br>
-            <textarea id="description" rows="10" cols="50" th:field="*{description}"></textarea>
-            <br><br>
-
-            <label for="upload">Upload:</label>
-            <input id="upload" type="file">
-            <br><br>
-
-            <input type="submit" value="Submit Hack">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-8 col-md-3">
+                        <h3 class="text-center">Create Your Life Hack</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-8 col-md-3">
+                        <label for="title">Title:</label>
+                        <input class="form-control" id="title" type="text" th:field="*{title}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-8 col-md-3">
+                        <label for="date">Date Created:</label>
+                        <input class="form-control" id="date" type="date" th:field="*{date}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-8 col-md-3">
+                        <label for="description">Description:</label>
+                        <br>
+                        <textarea class="form-control" id="description" rows="5" cols="50" th:field="*{description}"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-8 col-md-3 mb-3">
+                        <label for="upload">Upload:</label>
+                        <input class="form-control mb-4" id="upload" type="file">
+                        <input class="btn btn-primary w-100" type="submit" value="Submit Hack">
+                    </div>
+                </div>
+            </div>
         </form>
-        <br><br>
 
         <div th:insert="fragments/base :: footer"></div>
     </body>
