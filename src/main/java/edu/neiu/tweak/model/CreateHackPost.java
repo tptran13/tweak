@@ -1,10 +1,19 @@
 package edu.neiu.tweak.model;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
 public class CreateHackPost
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id; //keep id on top!!!!
     private String title;
     private String date;
     private String description;
+    private LocalDateTime created;
+    private LocalDateTime modified;
 
     public CreateHackPost(){}
 
@@ -43,5 +52,38 @@ public class CreateHackPost
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public LocalDateTime getCreated()
+    {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created)
+    {
+        this.created = created;
+    }
+
+    public LocalDateTime getModified()
+    {
+        return modified;
+    }
+
+    public void setModified(LocalDateTime modified)
+    {
+        this.modified = modified;
+    }
+
+    @PrePersist
+    public void onCreate()
+    {
+        this.setCreated(LocalDateTime.now());
+        this.setModified(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void onUpdate()
+    {
+        this.setModified(LocalDateTime.now());
     }
 }
