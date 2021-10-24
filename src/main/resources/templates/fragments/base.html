@@ -17,7 +17,7 @@
             <!-- Container wrapper -->
             <div class="container-fluid">
                 <!-- Navbar brand -->
-                <a class="navbar-brand" th:href="@{/}"><img id="logo" th:src="@{/images/tweak_logo.png}" class="rounded"></a>
+                <a class="navbar-brand" th:href="@{/}"><img id="logo" th:src="@{/images/tweak_logo.png}" class="rounded" ></a>
 
                 <!-- Toggle button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -28,7 +28,7 @@
                 <!-- Collapsible wrapper -->
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <!-- Left links -->
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav align-items-center">
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/}" th:classappend="${#request.getServletPath() == '/'}">
                                 <img id="homeButton" src="/images/house-fill.svg">
@@ -37,33 +37,20 @@
                     </ul>
                     <!-- Left links -->
 
-                    <form class="d-flex align-items-center w-75 form-search">
+                    <form class="d-flex flex-grow-1 align-items-center form-search">
                         <div class="input-group">
-                            <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle shadow-0" type="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false" id="dropdownMenuButton" aria-haspopup="true">All</button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><button class="dropdown-item" type="button">Electronic Hacks</button></li>
-                                    <li><button class="dropdown-item" type="button">Home Hacks</button></li>
-                                    <li><button class="dropdown-item" type="button">Beauty Hacks</button></li>
-                                    <li><button class="dropdown-item" type="button">Kitchen Hacks</button></li>
-                                    <li><button class="dropdown-item" type="button">Garage Hacks</button></li>
-                                    <li><button class="dropdown-item" type="button">Garden Hacks</button></li>
-                                </ul>
-                            </div>
                             <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
-                            <button type="button" class="btn btn-outline-primary">Search</button>
+                            <button type="button" class="btn btn-primary">Search</button>
                         </div>
                     </form>
-
-                    <ul class="navbar-nav">
-                        <li class="nav-item" th:classappend="${#request.getServletPath() == 'createprofile'}">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item flex-wrap" th:classappend="${#request.getServletPath() == 'createprofile'}">
                             <a class="nav-link" th:href="@{/createprofile}">Sign Up</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item flex-wrap">
                             <a class="nav-link">Sign In</a> <!--th:classappend="${#request.getServletPath() == '/'}"-->
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item flex-wrap">
                             <a class="nav-link">Account</a>
                         </li>
                     </ul>
@@ -83,12 +70,15 @@
             </div>
         </div>
 
-
-        <footer id="site-footer" th:fragment="footerr" class="mt-4">
+        <footer id="site-footer" th:fragment="footer" class="mt-4">
             <div class="container text-center">
                 <div class="text-muted mt-2">Tho Tran @ Copyright 2021</div>
             </div>
         </footer>
+
+        <a th:fragment="addPostButton" class="nav-link" id="floatingButton" th:href="@{/createpost}">
+            <img src="/images/plus-lg.svg">
+        </a>
     </body>
     <th:block th:fragment="scripts">
         <script th:src="@{webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
