@@ -9,9 +9,14 @@
     </head>
     <body>
         <div th:insert="fragments/base :: header"></div>
-        <h2>Welcome <span th:text="${fullname}"></span></h2>
-        <h3>You have successfully created your profile.</h3>
-        <br><br>
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-5">
+                <div class="col-4">
+                    <h2>Welcome <span th:text="${fullname}"></span></h2>
+                    <h3>You have successfully created your profile.</h3>
+                </div>
+            </div>
+        </div>
 
         <div th:insert="fragments/base :: footer"></div>
     </body>

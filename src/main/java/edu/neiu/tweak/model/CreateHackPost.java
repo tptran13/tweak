@@ -1,6 +1,11 @@
 package edu.neiu.tweak.model;
 
+import org.aspectj.bridge.Message;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,8 +14,14 @@ public class CreateHackPost
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id; //keep id on top!!!!
+
+    @NotBlank(message = "Title is required")
+    @Size(min = 2, message = "Title must be 2 or more characters")
     private String title;
+
+    @NotBlank(message = "Date is required")
     private String date;
+
     private String description;
     private LocalDateTime created;
     private LocalDateTime modified;
