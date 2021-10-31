@@ -30,7 +30,8 @@
                     <!-- Left links -->
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/}" th:classappend="${#request.getServletPath() == '/'}">
+                            <a class="nav-link " th:href="@{/}" th:classappend="${#request.getServletPath() == '/'}"
+                               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">
                                 <img id="homeButton" src="/images/house-fill.svg">
                             </a>
                         </li>
@@ -54,7 +55,8 @@
                             <a class="nav-link">Account</a>
                         </li>
                         <li class="nav-item flex-wrap">
-                            <a class="nav-link" th:href="@{/createpost}">
+                            <a class="nav-link" th:href="@{/createpost}"
+                               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add Post">
                                 <img th:src="@{/images/plus-square-fill.svg}">
                             </a>
                         </li>
@@ -81,12 +83,19 @@
             </div>
         </footer>
 
-        <a th:fragment="addPostButton" class="nav-link" id="floatingButton" th:href="@{/createpost}">
-            <img th:src="@{/images/plus-lg.svg}">
+        <a th:fragment="addPostButton" class="nav-link btn-secondary text-center floatingButton"
+           th:href="@{/createpost}" data-bs-toggle="tooltip" data-bs-placement="left" title="Add Post">
+            <img th:src="@{/images/plus-lg.svg}" class="mx-auto d-block">
         </a>
     </body>
     <th:block th:fragment="scripts">
         <script th:src="@{webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
         <script th:src="@{webjars/bootstrap/5.1.1/js/bootstrap.min.js}"></script>
+        <script>
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        </script>
     </th:block>
 </html>
