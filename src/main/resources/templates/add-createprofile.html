@@ -8,61 +8,101 @@
     <body>
         <div th:insert="fragments/base :: navigation"></div>
         <div th:insert="fragments/base :: header"></div>
-       <div class="container-fluid">
+        <div class="container-fluid">
             <div class="row justify-content-center mb-3">
-                <div class="col-8 col-md-3 text-center">
-                    <h3>Create Your Profile</h3>
-                </div>
+            <div class="col-8 col-md-3 text-center">
+                <h3>Create Your Profile</h3>
+            </div>
             </div>
         </div>
-        <form th:action="@{/createprofile}" th:object="${newProfile}" method="post">
+        <form th:action="@{/createprofile}" th:object="${addProfile}" method="post">
             <div class="container-fluid">
-                <div class="row justify-content-center mb-3">
-                    <div class="col-8 col-md-3">
-                        <label for="firstname">First Name:</label>
-                        <input id="firstname" class="form-control" type="text" th:field="*{firstName}" required>
-                    </div>
+            <div class="row justify-content-center">
+                <div class="col-8 col-md-3">
+                    <label for="firstname">First Name:</label>
+                    <input id="firstname" class="form-control" type="text" th:field="*{firstName}">
                 </div>
+            </div>
             </div>
             <div class="container-fluid">
                 <div class="row justify-content-center mb-3">
                     <div class="col-8 col-md-3">
-                        <label for="lastname">Last Name:</label>
-                        <input id="lastname" class="form-control" type="text" th:field="*{lastName}" required>
+                        <span class="text-danger small" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
                     </div>
                 </div>
             </div>
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="col-8 col-md-3 mb-3">
-                        <label for="birthday">Date of Birth:</label>
-                        <input id="birthday" class="form-control" type="date" th:field="*{dateOfBirth}" placeholder="MM/DD/YYYY" required>
+                    <div class="col-8 col-md-3">
+                        <label for="lastname">Last Name:</label>
+                        <input id="lastname" class="form-control" type="text" th:field="*{lastName}">
                     </div>
                 </div>
             </div>
             <div class="container-fluid">
                 <div class="row justify-content-center mb-3">
+                    <div class="col-8 col-md-3">
+                        <span class="text-danger small" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-8 col-md-3">
+                        <label for="birthday">Date of Birth:</label>
+                        <input id="birthday" class="form-control" type="date" th:field="*{dateOfBirth}" placeholder="MM/DD/YYYY">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-8 col-md-3">
+                        <span class="text-danger small" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-8 col-md-3">
+                        <label for="email">Email:</label>
+                        <input id="email" class="form-control" type="email" th:field="*{email}" placeholder="you@example.com">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-8 col-md-3">
+                        <span class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
                     <div class="col-8 col-md-3">
                         <label for="username">Username:</label>
-                        <input id="username" class="form-control" type="text" th:field="*{username}" pattern="[a-zA-Z0-9].{6,}" required>
-                        <small><em>(Username can only contain lowercase letters, uppercase letters, at least 1 number, and least 6 or more characters)</em></small>
+                        <input id="username" class="form-control" type="text" th:field="*{username}">
                     </div>
                 </div>
             </div>
             <div class="container-fluid">
                 <div class="row justify-content-center mb-3">
                     <div class="col-8 col-md-3">
+                        <span class="text-danger small" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-8 col-md-3">
                         <label for="password">Password:</label>
-                        <input id="password" class="form-control" type="password" th:field="*{password}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                        <small><em>(Password must contain at least one number, uppercase letter, lowercase letter, and at least 8 or more characters)</em></small>
+                        <input id="password" class="form-control" type="password" th:field="*{password}">
                     </div>
                 </div>
             </div>
             <div class="container-fluid">
                 <div class="row justify-content-center mb-4">
                     <div class="col-8 col-md-3">
-                        <label for="email">Email:</label>
-                        <input id="email" class="form-control" type="email" th:field="*{email}" placeholder="you@example.com" required>
+                        <span class="text-danger small" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                     </div>
                 </div>
             </div>

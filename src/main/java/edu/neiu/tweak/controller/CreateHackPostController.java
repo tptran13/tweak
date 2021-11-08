@@ -35,7 +35,7 @@ public class CreateHackPostController
     }
 
     @PostMapping
-    public String handleCreateProfileForm(@Valid @ModelAttribute("addPost") CreateHackPost post, Errors error)
+    public String handleHackPostForm(@Valid @ModelAttribute("addPost") CreateHackPost post, Errors error)
     {
         if(error.hasErrors())
         {

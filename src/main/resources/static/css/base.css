@@ -1,5 +1,10 @@
 body{
-    height: 1000px;
+    height: 1200px;
+}
+
+#siteName{
+    font-family: Brush Script MT, serif;
+    font-size: 60px;
 }
 
 #site-footer{
@@ -32,4 +37,8 @@ body{
 
 .tooltipColor{
     background: lawngreen;
+}
+
+.h5{
+    font-size: 20px;
 }
