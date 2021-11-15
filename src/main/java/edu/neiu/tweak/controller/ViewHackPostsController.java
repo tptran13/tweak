@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/viewpostrecords")
+@RequestMapping("/viewposts")
 public class ViewHackPostsController
 {
     private HackPostRepository postRepository;

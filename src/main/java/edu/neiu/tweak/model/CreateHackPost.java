@@ -1,9 +1,6 @@
 package edu.neiu.tweak.model;
 
-import org.aspectj.bridge.Message;
-
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -33,6 +30,16 @@ public class CreateHackPost
         this.title = title;
         this.date = date;
         this.description = description;
+    }
+
+    public long getId()
+    {
+        return this.id;
+    }
+
+    public void setId(long id)
+    {
+        this.id = id;
     }
 
     public String getTitle()

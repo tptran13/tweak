@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -34,6 +31,21 @@ public class CreateHackPostController
         return "add-createhackpost";
     }
 
+    @GetMapping("/viewmypost/{id}")
+    public String showMyPosts(@PathVariable Long id, Model model)
+    {
+        CreateHackPost post = this.postRepo.findById(id).get();
+        model.addAttribute("mypost", post);
+        return "view-mypost";
+    }
+
+    @GetMapping("/deletepost/{id}")
+    public String deletePost(@PathVariable long id)
+    {
+        this.postRepo.deleteById(id);
+        return "redirect:/viewposts";
+    }
+
     @PostMapping
     public String handleHackPostForm(@Valid @ModelAttribute("addPost") CreateHackPost post, Errors error)
     {
@@ -43,6 +55,27 @@ public class CreateHackPostController
         }
 
         this.postRepo.save(post);
-        return "redirect:viewpostrecords";
+        return "redirect:/viewposts";
+    }
+
+    @PostMapping("/editpost/{id}")
+    public String handleEditHackPost(@PathVariable long id, @Valid @ModelAttribute("mypost") CreateHackPost post, Errors error)
+    {
+        if(error.hasErrors())
+        {
+            return "view-mypost";
+        }
+
+        CreateHackPost originalPost = this.postRepo.findById(id).get();
+        updateOriginalPost(originalPost, post);
+        this.postRepo.save(originalPost);
+        return "redirect:/viewposts";
+    }
+
+    private void updateOriginalPost(CreateHackPost original, CreateHackPost update)
+    {
+        original.setTitle(update.getTitle());
+        original.setDate((update.getDate()));
+        original.setDescription(update.getDescription());
     }
 }

@@ -9,15 +9,18 @@
         <div th:insert="fragments/base :: header"></div>
 
         <div class="container-fluid">
-            <div th:each="post: ${hackposts}">
-                <div class="row justify-content-center mb-3">
-                    <div class="col-12 col-md-4 card">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${post.title}"></h5>
-                            <span th:text="'Date created: ' + ${#temporals.format(post.created, 'dd-MM-yyyy HH:mm')}"></span>
-                            <br>
-                            <span th:text="'Date created: ' + ${#temporals.format(post.modified, 'dd-MM-yyyy HH:mm')}"></span>
-                            <br>
+            <div class="row row-cols-3 justify-content-center mx-auto">
+                <div th:each="post: ${hackposts}">
+                    <div class="row mb-3 mx-auto">
+                        <div class="col card">
+                            <div class="card-body d-inline">
+                                <h5 class="card-title" th:text="${post.title}"></h5>
+                                <p th:text="${post.description}" class="w-75"></p>
+                                <div th:text="'Date created: ' + ${#temporals.format(post.created, 'dd-MM-yyyy HH:mm')}"></div>
+                                <br>
+                                <a th:href="@{/createpost/viewmypost/{id}(id=${post.id})}"><i id="editingPencil" class="bi bi-pencil-square me-2"></i></a>
+                                <a th:href="@{/createpost/deletepost/{id}(id=${post.id})}"><i id="trashButton" class="bi bi-trash-fill"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>

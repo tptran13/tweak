@@ -2,3 +2,18 @@
     width: 100px;
     hight: 100px;
 }
+
+#homeButton{
+    font-size: 40px;
+    color: white;
+}
+
+#addButtonNavBar{
+    font-size: 40px;
+    color: lawngreen;
+}
+
+#addButtonFloat{
+    font-size: 60px;
+    color: lawngreen;
+}

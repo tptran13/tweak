@@ -3,6 +3,7 @@ package edu.neiu.tweak.controller;
 import edu.neiu.tweak.data.CreateProfileRepository;
 import edu.neiu.tweak.model.CreateProfile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -33,16 +34,33 @@ public class CreateProfileController
         return "add-createprofile";
     }
 
+    @GetMapping("/welcome")
+    public String displayThankYou(@ModelAttribute("name") Object attr, Model model)
+    {
+        model.addAttribute("fullname", attr);
+        return "/profile-registered";
+    }
+
     @PostMapping
-    public String handleNewProfileForm(@Valid @ModelAttribute("addProfile") CreateProfile profile, Errors error)
+    public String handleNewProfileForm(@Valid @ModelAttribute("addProfile") CreateProfile profile, RedirectAttributes attrs, Errors error)
     {
         if(error.hasErrors())
         {
             return "add-createprofile";
         }
 
-        this.profileRepo.save(profile);
-        return "redirect:profilerecords";
+        try
+        {
+            this.profileRepo.save(profile);
+        }
+        catch (DataIntegrityViolationException err)
+        {
+            error.rejectValue("email", "invalidEmail", "Email is taken, please try another one.");
+            return "redirect:add-createprofile";
+        }
+
+        attrs.addFlashAttribute("name", profile.getFirstName() + " " + profile.getLastName());
+        return "redirect:createprofile/welcome";
     }
 }
 

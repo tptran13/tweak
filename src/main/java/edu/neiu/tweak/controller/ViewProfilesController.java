@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/profilerecords")
+@RequestMapping("/viewprofiles")
 public class ViewProfilesController
 {
     private CreateProfileRepository profilesRepo;

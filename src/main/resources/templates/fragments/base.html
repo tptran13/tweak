@@ -8,6 +8,8 @@
             <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css}">
             <link th:rel="stylesheet" th:href="@{/css/base.css}">
             <link th:rel="stylesheet" th:href="@{/css/navbar.css}">
+            <link th:rel="stylesheet" th:href="@{/css/display.css}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
         </th:block>
         <title>Copyright Fragment</title>
     </head>
@@ -27,46 +29,63 @@
 
                 <!-- Collapsible wrapper -->
                 <div class="collapse navbar-collapse" id="navbarContent">
-                    <!-- Left links -->
-                    <ul class="navbar-nav align-items-center">
-                        <li class="nav-item">
-                            <a class="nav-link " th:href="@{/}" th:classappend="${#request.getServletPath() == '/'}"
-                               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">
-                                <img id="homeButton" src="/images/house-fill.svg">
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- Left links -->
-
-                    <form class="d-flex flex-grow-1 align-items-center form-search">
-                        <div class="input-group">
-                            <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
-                            <button type="button" class="btn btn-primary">Search</button>
+                    <div class="container-fluid">
+                        <div class="row justify-content-start align-items-center">
+                            <!-- Left links -->
+                            <div class="col-lg-3 col-sm-12">
+                                <ul class="navbar-nav align-items-center">
+                                    <li class="nav-item">
+                                        <a class="nav-link " th:href="@{/}" th:classappend="${#request.getServletPath() == '/'}"
+                                           data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">
+                                            <i id="homeButton" class="bi bi-house-fill"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Left links -->
+                            <div class="col-lg-5 col-sm-12">
+                                <form class="form-search">
+                                    <div class="input-group">
+                                        <span class="dropdown">
+                                            <button type="button" class="btn btn-info dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Link</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" th:href="@{/viewposts}">View Posts</a></li>
+                                                <li><a class="dropdown-item" th:href="@{/viewprofiles}">Search Profiles</a></li>
+                                            </ul>
+                                        </span>
+                                        <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
+                                        <button type="button" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <ul class="navbar-nav align-items-center">
+                                    <li class="nav-item" th:classappend="${#request.getServletPath() == 'createprofile'}">
+                                        <a class="nav-link" th:href="@{/createprofile}">Sign Up</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">Login</a> <!--th:classappend="${#request.getServletPath() == '/'}"-->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">Account</a>
+                                    </li>
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link" th:href="@{/createpost}"-->
+<!--                                           data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add Post">-->
+<!--                                            <i id="addButtonNavBar" class="bi bi-plus-circle-fill"></i>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+                                </ul>
+                            </div>
                         </div>
-                    </form>
-                    <ul class="navbar-nav align-items-center">
-                        <li class="nav-item flex-wrap" th:classappend="${#request.getServletPath() == 'createprofile'}">
-                            <a class="nav-link" th:href="@{/createprofile}">Sign Up</a>
-                        </li>
-                        <li class="nav-item flex-wrap">
-                            <a class="nav-link">Sign In</a> <!--th:classappend="${#request.getServletPath() == '/'}"-->
-                        </li>
-                        <li class="nav-item flex-wrap">
-                            <a class="nav-link">Account</a>
-                        </li>
-                        <li class="nav-item flex-wrap">
-                            <a class="nav-link" th:href="@{/createpost}"
-                               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add Post">
-                                <img th:src="@{/images/plus-square-fill.svg}">
-                            </a>
-                        </li>
-                    </ul>
+                    </div>
                 </div>
                 <!-- Collapsible wrapper -->
             </div>
             <!-- Container wrapper -->
         </nav>
         <!-- Navbar -->
+
         <div th:fragment="header">
             <div class="container-fluid">
                 <div class="row justify-content-center mt-2 mb-2">
@@ -83,12 +102,10 @@
             </div>
         </footer>
 
-        <a th:fragment="addPostButton" class="nav-link btn-secondary text-center floatingButton"
+        <a th:fragment="addPostButton" class="nav-link text-center floatingButton"
            th:href="@{/createpost}" data-bs-toggle="tooltip" data-bs-placement="left" title="Add Post">
-            <img th:src="@{/images/plus-lg.svg}" class="mx-auto d-block">
+            <i id="addButtonFloat" class="bi bi-plus-circle-fill mx-auto d-block"></i>
         </a>
-
-        <div id="container-overflow-scroll"></div>
     </body>
     <th:block th:fragment="scripts">
         <script th:src="@{webjars/popper.js/2.9.3/umd/popper.min.js}"></script>

@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12 col-md-4 text-center mt-5 mb-5">
-                <h3>DB Profile Records</h3>
+                <h3>Check Out Our Community</h3>
             </div>
         </div>
     </div>
@@ -23,10 +23,7 @@
                         <span class="card-title h5" th:text="${profile.firstName}"></span>
                         <span class="card-title h5" th:text="${profile.lastName}"></span>
                         <br>
-                        <span th:text="'Date created: ' + ${#temporals.format(profile.created, 'dd-MM-yyyy HH:mm')}"></span>
-                        <br>
-                        <span th:text="'Date created: ' + ${#temporals.format(profile.modified, 'dd-MM-yyyy HH:mm')}"></span>
-                        <br>
+                        <span th:text="'Date Joined: ' + ${#temporals.format(profile.created, 'dd-MM-yyyy HH:mm')}"></span>
                     </div>
                 </div>
             </div>

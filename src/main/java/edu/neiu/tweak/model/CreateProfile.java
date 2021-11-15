@@ -1,6 +1,9 @@
 package edu.neiu.tweak.model;
 
+import org.springframework.stereotype.Controller;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -31,6 +34,8 @@ public class CreateProfile
     private String password;
 
     @NotBlank(message = "Email is required")
+    @Email(message = "Not a valid email address")
+    @Column(unique = true)
     private String email;
 
     private LocalDateTime created;
