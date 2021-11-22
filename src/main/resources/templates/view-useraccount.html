@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:insert="fragments/base :: headAttributes"></th:block>
+        <title>User Account</title>
+    </head>
+    <body>
+        <div th:insert="fragments/base :: navigation"></div>
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-5 mb-3">
+                <div class="col-12 text-center">
+                    <h2>My Account</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center mb-3">
+                <div class="col text-center">
+                    <a class="btn btn-secondary" role="button" th:href="@{/viewposts}">My Posts</a>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center mb-3">
+                <div class="col text-center">
+                    <a class="btn btn-secondary" role="button">Edit My Account</a>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center mb-3">
+                <div class="col text-center">
+                    <a class="btn btn-danger" role="button" th:href="@{/logout}">Logout</a>
+                </div>
+            </div>
+        </div>
+        <div th:insert="fragments/base :: footer"></div>
+    </body>
+    <th:block th:replace="fragments/base :: scripts"></th:block>
+</html>
