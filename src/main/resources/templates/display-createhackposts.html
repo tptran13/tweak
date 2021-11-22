@@ -6,8 +6,13 @@
     </head>
     <body>
         <div th:insert="fragments/base :: navigation"></div>
-        <div th:insert="fragments/base :: header"></div>
-
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-3 mb-3">
+                <div class="col text-center">
+                    <h2>Hack Posts</h2>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row row-cols-3 justify-content-center mx-auto">
                 <div th:each="post: ${hackposts}">
@@ -19,7 +24,7 @@
                                 <div th:text="'Date created: ' + ${#temporals.format(post.created, 'dd-MM-yyyy HH:mm')}"></div>
                                 <br>
                                 <a th:href="@{/createpost/viewmypost/{id}(id=${post.id})}"><i id="editingPencil" class="bi bi-pencil-square me-2"></i></a>
-                                <a th:href="@{/createpost/deletepost/{id}(id=${post.id})}"><i id="trashButton" class="bi bi-trash-fill"></i></a>
+                                <a th:href="@{/createpost/deletepost/{id}(id=${post.id})}"><i id="trashButton" class="bi bi-trash-fill me-2"></i></a>
                             </div>
                         </div>
                     </div>
@@ -32,3 +37,24 @@
     </body>
     <th:block th:replace="fragments/base :: scripts"></th:block>
 </html>
+
+<!--Modal-->
+<!--
+<a><i id="trashButton" class="bi bi-trash-fill" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></a>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"><p>Are you sure you want to delete the post?</p></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a th:href="@{/createpost/deletepost/{id}(id=${post.id})}"><button type="button" class="btn btn-primary">Confirm</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
