@@ -1,9 +1,9 @@
-#editingPencil{
+.editingPencil{
     font-size: 30px;
     color: #FFD700;
 }
 
-#trashButton{
+.trashButton{
     font-size: 30px;
     color: red;
     cursor: pointer;

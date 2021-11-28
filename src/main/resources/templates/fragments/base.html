@@ -47,7 +47,8 @@
                                 <form class="form-search">
                                     <div class="input-group">
                                         <span class="dropdown">
-                                            <button type="button" class="btn btn-info dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Link</button>
+                                            <button type="button" class="btn btn-info dropdown-toggle" role="button"
+                                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="true">Links</button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li><a class="dropdown-item" th:href="@{/viewposts}">View Posts</a></li>
                                                 <li><a class="dropdown-item" th:href="@{/viewprofiles}">Search Profiles</a></li>
@@ -63,10 +64,10 @@
                                     <li class="nav-item" th:classappend="${#request.getServletPath() == 'createprofile'}">
                                         <a class="nav-link" th:href="@{/createprofile}">Sign Up</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link">Login</a>
+                                    <li class="nav-item" th:classappend="${#request.getServletPath() == 'login'}">
+                                        <a class="nav-link" th:href="@{/login}">Login</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" th:classappend="${#request.getServletPath() == 'useraccount'}">
                                         <a class="nav-link" th:href="@{/useraccount}">Account</a>
                                     </li>
                                 </ul>

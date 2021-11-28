@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "ACCOUNT")
 public class CreateProfile
 {
     @Id
@@ -27,6 +28,7 @@ public class CreateProfile
 
     @NotBlank(message = "Username is required")
     @Size(min=4, message = "Username must have at least 4 characters")
+    @Column(unique = true)
     private String username;
 
     @NotBlank(message = "Password is required")
@@ -41,7 +43,7 @@ public class CreateProfile
     private LocalDateTime created;
     private LocalDateTime modified;
 
-    public CreateProfile(){};
+    public CreateProfile(){}
 
     public CreateProfile(String firstName, String lastName, String dateOfBirth, String username, String password, String email)
     {

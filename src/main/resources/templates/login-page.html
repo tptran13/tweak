@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:insert="fragments/base :: headAttributes"></th:block>
+        <title>Login</title>
+    </head>
+    <body>
+        <div th:insert="fragments/base :: navigation"></div>
+        <div th:insert="fragments/base :: header"></div>
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-sm-12 mt-5 mb-2 text-center text-secondary" th:if="${param.logout}">
+                    <div>You have been logged out</div>
+                </div>
+            </div>
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-sm-12 mt-2 mb-2">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" th:name="username" placeholder="SuperPerson" required>
+                    </div>
+                   <div class="w-100"></div>  <!--force break to create new line-->
+                    <div class="col-lg-4 col-sm-12 mt-2 mb-2">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" th:name="password" placeholder="password" required>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-lg-4 col-sm-12 mt-2">
+                        <input type="submit" class="btn btn-primary" value="Login">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-sm-12 mt-2 mb-2" th:if="${param.error}">
+                        <div class="text-danger">Invalid username or password</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div th:insert="fragments/base :: addPostButton"></div>
+        <div th:insert="fragments/base :: footer"></div>
+    </body>
+    <th:block th:replace="fragments/base :: scripts"></th:block>
+</html>

@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "HACKPOST")
 public class CreateHackPost
 {
     @Id
@@ -20,6 +21,11 @@ public class CreateHackPost
     private String date;
 
     private String description;
+
+//    @Lob
+//    @Column(name = "image", columnDefinition="BLOB")
+//    private byte[] image;
+
     private LocalDateTime created;
     private LocalDateTime modified;
 

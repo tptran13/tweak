@@ -27,12 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/", "/createprofile/**").permitAll()  //allow all to view
                 .and()
                 .authorizeRequests()
-                .antMatchers("/createpost/**", "/viewposts/**", "/viewprofiles/**").authenticated() //required auth to view
+                .antMatchers("/createpost/**", "/viewposts/**", "/viewprofiles/**", "/useraccount/**").authenticated() //required auth to view
                 .and()
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/useraccount", true).permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login?logout").permitAll();
     }
 
     @Override

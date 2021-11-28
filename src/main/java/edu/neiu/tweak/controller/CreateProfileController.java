@@ -42,7 +42,7 @@ public class CreateProfileController
     }
 
     @PostMapping
-    public String handleNewProfileForm(@Valid @ModelAttribute("addProfile") CreateProfile profile, RedirectAttributes attrs, Errors error)
+    public String handleNewProfileForm(@ModelAttribute("addProfile") @Valid CreateProfile profile, Errors error, RedirectAttributes attrs)
     {
         if(error.hasErrors())
         {
@@ -56,7 +56,17 @@ public class CreateProfileController
         catch (DataIntegrityViolationException err)
         {
             error.rejectValue("email", "invalidEmail", "Email is taken, please try another one.");
-            return "redirect:add-createprofile";
+            return "add-createprofile";
+        }
+
+        try
+        {
+            this.profileRepo.save(profile);
+        }
+        catch (DataIntegrityViolationException err)
+        {
+            error.rejectValue("username", "invalidUsername", "Username is taken, please try another one.");
+            return "add-createprofile";
         }
 
         attrs.addFlashAttribute("name", profile.getFirstName() + " " + profile.getLastName());

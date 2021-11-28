@@ -16,24 +16,32 @@
         <div class="container-fluid">
             <div class="row justify-content-center mb-3">
                 <div class="col text-center">
-                    <a class="btn btn-secondary" role="button" th:href="@{/viewposts}">My Posts</a>
+                    <a class="btn btn-secondary w-25" role="button" th:href="@{/viewposts}">My Posts</a>
                 </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="row justify-content-center mb-3">
                 <div class="col text-center">
-                    <a class="btn btn-secondary" role="button">Edit My Account</a>
+                    <a class="btn btn-secondary w-25" role="button">Favorites</a>
                 </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="row justify-content-center mb-3">
                 <div class="col text-center">
-                    <a class="btn btn-danger" role="button" th:href="@{/logout}">Logout</a>
+                    <a class="btn btn-secondary w-25" role="button">Edit My Account</a>
                 </div>
             </div>
         </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center mb-3">
+                <div class="col text-center">
+                    <a class="btn btn-danger w-25" role="button" th:href="@{/logout}">Logout</a>
+                </div>
+            </div>
+        </div>
+        <div th:insert="fragments/base :: addPostButton"></div>
         <div th:insert="fragments/base :: footer"></div>
     </body>
     <th:block th:replace="fragments/base :: scripts"></th:block>
