@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-        xmlns:th="http://www.thymeleaf.org">
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <th:block th:fragment="headAttributes">
             <meta charset="UTF-8">
@@ -61,13 +61,13 @@
                             </div>
                             <div class="col-lg-3 col-sm-12">
                                 <ul class="navbar-nav align-items-center">
-                                    <li class="nav-item" th:classappend="${#request.getServletPath() == 'createprofile'}">
+                                    <li class="nav-item" th:classappend="${#request.getServletPath() == '/createprofile' ? 'active' : ''}" sec:authorize="isAnonymous()">
                                         <a class="nav-link" th:href="@{/createprofile}">Sign Up</a>
                                     </li>
-                                    <li class="nav-item" th:classappend="${#request.getServletPath() == 'login'}">
+                                    <li class="nav-item" th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}" sec:authorize="isAnonymous()">
                                         <a class="nav-link" th:href="@{/login}">Login</a>
                                     </li>
-                                    <li class="nav-item" th:classappend="${#request.getServletPath() == 'useraccount'}">
+                                    <li class="nav-item" th:classappend="${#request.getServletPath() == '/useraccount' ? 'active' : ''}" sec:authorize="hasAnyRole('ADMIN', 'USER')">
                                         <a class="nav-link" th:href="@{/useraccount}">Account</a>
                                     </li>
                                 </ul>
@@ -97,9 +97,9 @@
             </div>
         </footer>
 
-        <a th:fragment="addPostButton" class="nav-link text-center floatingButton"
+        <a th:fragment="addPostButton" class="nav-link text-center float-end"
            th:href="@{/createpost}" data-bs-toggle="tooltip" data-bs-placement="left" title="Add Post">
-            <i id="addButtonFloat" class="bi bi-plus-circle-fill mx-auto d-block"></i>
+            <i id="addButtonFloat" class="bi bi-plus-circle-fill mx-auto d-block rounded-circle"></i>
         </a>
     </body>
     <th:block th:fragment="scripts">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <th:block th:insert="fragments/base :: headAttributes"></th:block>
         <title>User Account</title>
@@ -37,7 +37,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center mb-3">
                 <div class="col text-center">
-                    <a class="btn btn-danger w-25" role="button" th:href="@{/logout}">Logout</a>
+                    <a class="btn btn-danger w-25" role="button" th:href="@{/logout}" sec:authorize="hasAnyRole('ADMIN', 'USER')">Logout</a>
                 </div>
             </div>
         </div>

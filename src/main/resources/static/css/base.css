@@ -18,23 +18,9 @@ body{
     position: fixed;
 }
 
-.floatingButton{
-    width: 60px;
-    height: 60px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    border-radius: 50%;
-    color: white;
-    position: fixed;
-    right: 20px;
-    bottom: 60px;
-}
-
-.tooltipColor{
-    background: lawngreen;
+#addButtonFloat{
+    font-size: 60px;
+    color: #0d6efd;
 }
 
 .h5{

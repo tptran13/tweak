@@ -27,7 +27,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/", "/createprofile/**").permitAll()  //allow all to view
                 .and()
                 .authorizeRequests()
-                .antMatchers("/createpost/**", "/viewposts/**", "/viewprofiles/**", "/useraccount/**").authenticated() //required auth to view
+                .antMatchers("/createpost/**", "/viewposts/**", "/viewprofiles/**", "/useraccount/**").hasAnyRole("ADMIN", "USER") //required auth to view
+                .and()
+                .authorizeRequests()
+                .antMatchers("/login/**", "/createprofile/**").anonymous()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/useraccount", true).permitAll()
                 .and()
@@ -41,6 +44,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         auth.inMemoryAuthentication()
                 .withUser("user")
                 .password(passwordEncoder().encode("password"))
-                .roles("USER"); //give user a role
+                .roles("USER") //give user a role
+            .and()
+                .withUser("admin")
+                .password(passwordEncoder().encode("password"))
+                .roles("ADMIN");
     }
 }
