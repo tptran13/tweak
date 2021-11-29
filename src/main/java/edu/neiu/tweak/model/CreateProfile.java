@@ -146,6 +146,31 @@ public class CreateProfile implements UserDetails
         this.modified = modified;
     }
 
+    public void setEnabled(boolean enabled)
+    {
+        this.enabled = enabled;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired)
+    {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked)
+    {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired)
+    {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public void setRoles(Collection<Role> roles)
+    {
+        this.roles = roles;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {

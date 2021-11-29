@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CreateProfileRepository extends CrudRepository<CreateProfile, Long>
 {
-
+    CreateProfile findByUsername(String username);
 }
