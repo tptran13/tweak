@@ -1,6 +1,8 @@
 package edu.neiu.tweak.model;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -8,10 +10,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "USER")
-public class CreateProfile
+@Table(name = "CREATE_PROFILE_USER")
+public class CreateProfile implements UserDetails
 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,33 +31,49 @@ public class CreateProfile
     @NotBlank(message = "DOB is required")
     private String dateOfBirth;
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "Not a valid email address")
+    @Column(unique = true, nullable = false)
+    private String email;
+
     @NotBlank(message = "Username is required")
     @Size(min=4, message = "Username must have at least 4 characters")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
     @NotBlank(message = "Password is required")
-    @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}", message = "Must contain at least one lowercase letter, one uppercase letter, a number, and at least 6 or more characters")
+    @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}", message = "Password does not meet requirements")
+    @Column(nullable = false)
     private String password;
-
-    @NotBlank(message = "Email is required")
-    @Email(message = "Not a valid email address")
-    @Column(unique = true)
-    private String email;
 
     private LocalDateTime created;
     private LocalDateTime modified;
 
+    private boolean enabled;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Collection<Role> roles;
+
+    public enum Role { ROLE_ADMIN, ROLE_USER }
+
     public CreateProfile(){}
 
-    public CreateProfile(String firstName, String lastName, String dateOfBirth, String username, String password, String email)
+    public CreateProfile(String firstName, String lastName, String dateOfBirth, String email, String username, String password)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+        this.email = email;
         this.username = username;
         this.password = password;
-        this.email = email;
+        this.accountNonExpired = true;
+        this.accountNonLocked = true;
+        this.credentialsNonExpired = true;
     }
 
     public String getFirstName()
@@ -85,19 +106,9 @@ public class CreateProfile
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getUsername()
-    {
-        return username;
-    }
-
     public void setUsername(String username)
     {
         this.username = username;
-    }
-
-    public String getPassword()
-    {
-        return password;
     }
 
     public void setPassword(String password)
@@ -133,6 +144,56 @@ public class CreateProfile
     public void setModified(LocalDateTime modified)
     {
         this.modified = modified;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        Set<GrantedAuthority> authoritySet = new HashSet<>();
+
+        for(Role role : roles)
+        {
+            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.toString());
+            authoritySet.add(grantedAuthority);
+        }
+
+        return authoritySet;
+    }
+
+    @Override
+    public String getPassword()
+    {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername()
+    {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired()
+    {
+        return this.accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked()
+    {
+        return this.accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired()
+    {
+        return this.credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled()
+    {
+        return this.enabled;
     }
 
     @PrePersist
