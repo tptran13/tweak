@@ -46,14 +46,11 @@
                             <div class="col-lg-5 col-sm-12">
                                 <form class="form-search">
                                     <div class="input-group">
-                                        <span class="dropdown">
-                                            <button type="button" class="btn btn-info dropdown-toggle" role="button"
-                                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="true">Links</button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" th:href="@{/viewposts}">View Posts</a></li>
-                                                <li><a class="dropdown-item" th:href="@{/viewprofiles}">Search Profiles</a></li>
-                                            </ul>
-                                        </span>
+                                        <button type="button" class="btn btn-info dropdown-toggle" role="button" data-bs-toggle="dropdown">Links</button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" th:href="@{/viewposts}">View Posts</a></li>
+                                            <li><a class="dropdown-item" th:href="@{/viewprofiles}">Search Profiles</a></li>
+                                        </ul>
                                         <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
                                         <button type="button" class="btn btn-primary">Search</button>
                                     </div>
@@ -91,13 +88,13 @@
             </div>
         </div>
 
-        <footer id="site-footer" th:fragment="footer" class="mt-4">
+        <footer id="site-footer" th:fragment="footer" class="position-fixed bottom-0 start-50 translate-middle-x w-100">
             <div class="container text-center">
-                <div class="text-muted mt-2">Tho Tran @ Copyright 2021</div>
+                <div class="text-light mx-auto">Tho Tran @ Copyright 2021</div>
             </div>
         </footer>
 
-        <a th:fragment="addPostButton" class="nav-link text-center float-end"
+        <a th:fragment="addPostButton" class="nav-link text-center position-fixed top-50 end-0 translate-middle-y"
            th:href="@{/createpost}" data-bs-toggle="tooltip" data-bs-placement="left" title="Add Post">
             <i id="addButtonFloat" class="bi bi-plus-circle-fill mx-auto d-block rounded-circle"></i>
         </a>

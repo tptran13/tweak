@@ -1,5 +1,8 @@
+//******************** Post/Blog Controller ********************
 package edu.neiu.tweak.controller;
 
+import com.cloudinary.utils.ObjectUtils;
+import edu.neiu.tweak.config.CloudinaryConfig;
 import edu.neiu.tweak.data.HackPostRepository;
 import edu.neiu.tweak.model.CreateHackPost;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,19 +10,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/createpost")
 public class CreateHackPostController
 {
     private HackPostRepository postRepo;
+    private CloudinaryConfig cloudConfig;
 
     @Autowired
-    public CreateHackPostController(HackPostRepository postRepo)
+    public CreateHackPostController(HackPostRepository postRepo, CloudinaryConfig cloudConfig)
     {
         this.postRepo = postRepo;
+        this.cloudConfig = cloudConfig;
     }
 
     @GetMapping
@@ -30,7 +38,7 @@ public class CreateHackPostController
     }
 
     @GetMapping("/viewmypost/{id}")
-    public String showMyPosts(@PathVariable Long id, Model model)
+    public String showPosts(@PathVariable Long id, Model model)
     {
         CreateHackPost post = this.postRepo.findById(id).get();
         model.addAttribute("mypost", post);
@@ -45,14 +53,28 @@ public class CreateHackPostController
     }
 
     @PostMapping
-    public String handleHackPostForm(@Valid @ModelAttribute("addPost") CreateHackPost post, Errors error)
+    public String handleHackPostForm(@Valid @ModelAttribute("addPost") CreateHackPost post, Errors error,
+                                     @RequestParam("imageFile")MultipartFile imageFile)
     {
         if(error.hasErrors())
         {
             return "add-createhackpost";
         }
 
-        this.postRepo.save(post);
+        //import ObjectUtils from cloudinary util
+        try
+        {
+            Map<String, Object> uploaded = this.cloudConfig.upload(imageFile.getBytes(), ObjectUtils.asMap("resource", "auto"));
+            post.setImage(uploaded.get("url").toString());
+            this.postRepo.save(post);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            error.rejectValue("image", "invalidImage", "There is an error with the image, please try uploading again.");
+            return "add-createhackpost";
+        }
+
         return "redirect:/viewposts";
     }
 
@@ -77,3 +99,9 @@ public class CreateHackPostController
         original.setDescription(update.getDescription());
     }
 }
+
+//        if(imageFile.isEmpty())
+//        {
+//            error.rejectValue("image", "invalidImage", "Please upload an image");
+//            return "add-createhackpost";
+//        }

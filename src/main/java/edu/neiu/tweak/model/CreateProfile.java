@@ -1,3 +1,4 @@
+//******************* This the USER class *******************
 package edu.neiu.tweak.model;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -49,6 +50,10 @@ public class CreateProfile implements UserDetails
     private LocalDateTime created;
     private LocalDateTime modified;
 
+    //mapping relationship, getter & setter have been created
+    @OneToMany(mappedBy = "create_profile_user", cascade = CascadeType.ALL)
+    private Set<CreateHackPost> posts;
+
     private boolean enabled;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
@@ -61,7 +66,12 @@ public class CreateProfile implements UserDetails
 
     public enum Role { ROLE_ADMIN, ROLE_USER }
 
-    public CreateProfile(){}
+    public CreateProfile()
+    {
+        this.accountNonExpired = true;
+        this.accountNonLocked = true;
+        this.credentialsNonExpired = true;
+    }
 
     public CreateProfile(String firstName, String lastName, String dateOfBirth, String email, String username, String password)
     {
@@ -164,6 +174,16 @@ public class CreateProfile implements UserDetails
     public void setCredentialsNonExpired(boolean credentialsNonExpired)
     {
         this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public Set<CreateHackPost> getPosts()
+    {
+        return posts;
+    }
+
+    public void setPosts(Set<CreateHackPost> posts)
+    {
+        this.posts = posts;
     }
 
     public void setRoles(Collection<Role> roles)

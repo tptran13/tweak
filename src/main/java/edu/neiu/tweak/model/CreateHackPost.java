@@ -1,3 +1,4 @@
+//***************** This is the blog/post class *****************
 package edu.neiu.tweak.model;
 
 import javax.persistence.*;
@@ -22,12 +23,15 @@ public class CreateHackPost
 
     private String description;
 
-//    @Lob
-//    @Column(name = "image", columnDefinition="BLOB")
-//    private byte[] image;
+    private String image;
 
     private LocalDateTime created;
     private LocalDateTime modified;
+
+    //mapping relationship, getter & setter has been created
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id")
+    private CreateProfile user;
 
     public CreateHackPost(){}
 
@@ -78,6 +82,16 @@ public class CreateHackPost
         this.description = description;
     }
 
+    public String getImage()
+    {
+        return image;
+    }
+
+    public void setImage(String image)
+    {
+        this.image = image;
+    }
+
     public LocalDateTime getCreated()
     {
         return created;
@@ -96,6 +110,16 @@ public class CreateHackPost
     public void setModified(LocalDateTime modified)
     {
         this.modified = modified;
+    }
+
+    public CreateProfile getUser()
+    {
+        return user;
+    }
+
+    public void setUser(CreateProfile user)
+    {
+        this.user = user;
     }
 
     @PrePersist

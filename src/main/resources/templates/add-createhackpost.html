@@ -10,7 +10,7 @@
         <div th:insert="fragments/base :: navigation"></div>
         <div th:insert="fragments/base :: header"></div>
 
-        <form th:action="@{/createpost}" th:object="${addPost}" method="post">
+        <form th:action="@{/createpost}" th:object="${addPost}" method="post" enctype="multipart/form-data">
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-8 col-md-3">
@@ -21,7 +21,7 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-8 col-md-3">
-                        <label for="title">Title:</label>
+                        <label for="title">Title</label>
                         <input class="form-control" id="title" type="text" th:field="*{title}">
                     </div>
                 </div>
@@ -36,7 +36,7 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-8 col-md-3">
-                        <label for="date">Date Created:</label>
+                        <label for="date">Date Created</label>
                         <input class="form-control" id="date" type="date" th:field="*{date}">
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             <div class="container-fluid">
                 <div class="row justify-content-center mb-3">
                     <div class="col-8 col-md-3">
-                        <label for="description">Description:</label>
+                        <label for="description">Description</label>
                         <br>
                         <textarea class="form-control" id="description" rows="5" cols="50" th:field="*{description}"></textarea>
                     </div>
@@ -60,8 +60,21 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-8 col-md-3 mb-3">
-                        <label for="upload">Upload:</label>
-                        <input class="form-control mb-4" id="upload" type="file">
+                        <label for="image" class="form-label">Upload an image</label>
+                        <input class="form-control mb-4" id="image" type="file" name="imageFile">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-8 col-md-3">
+                        <span class="text-danger small" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-8 col-md-3 mb-3">
                         <input class="btn btn-primary w-100 mb-3" type="submit" value="Submit Hack">
                         <a class="btn btn-danger w-100" role="link" th:href="@{/viewposts}">Cancel</a>
                     </div>

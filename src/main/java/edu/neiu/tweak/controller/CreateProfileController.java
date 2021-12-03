@@ -1,35 +1,44 @@
+//****************** User Controller ******************
 package edu.neiu.tweak.controller;
 
 import edu.neiu.tweak.data.CreateProfileRepository;
+import edu.neiu.tweak.data.HackPostRepository;
+import edu.neiu.tweak.model.CreateHackPost;
 import edu.neiu.tweak.model.CreateProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/createprofile")
 public class CreateProfileController
 {
     private CreateProfileRepository profileRepo;
+    private BCryptPasswordEncoder passwordEncoder;
+    private HackPostRepository postRepo;
 
     @Autowired
-    public CreateProfileController(CreateProfileRepository profileRepo)
+    public CreateProfileController(CreateProfileRepository profileRepo, BCryptPasswordEncoder passwordEncoder, HackPostRepository postRepo)
     {
         this.profileRepo = profileRepo;
+        this.passwordEncoder = passwordEncoder;
+        this.postRepo = postRepo;
     }
 
     @GetMapping
     public String getNewProfile(Model model)
     {
+        List<CreateHackPost> posts = (List<CreateHackPost>) postRepo.findAll();
+        model.addAttribute("myPosts", posts);
         model.addAttribute("addProfile", new CreateProfile());
         return "add-createprofile";
     }
@@ -51,21 +60,15 @@ public class CreateProfileController
 
         try
         {
+            //profile to get pass and encode it
+            profile.setPassword(passwordEncoder.encode(profile.getPassword()));
+            profile.setEnabled(true);
+            profile.setRoles(Set.of(CreateProfile.Role.ROLE_USER));
             this.profileRepo.save(profile);
         }
         catch (DataIntegrityViolationException err)
         {
             error.rejectValue("email", "invalidEmail", "Email is taken, please try another one.");
-            return "add-createprofile";
-        }
-
-        try
-        {
-            this.profileRepo.save(profile);
-        }
-        catch (DataIntegrityViolationException err)
-        {
-            error.rejectValue("username", "invalidUsername", "Username is taken, please try another one.");
             return "add-createprofile";
         }
 

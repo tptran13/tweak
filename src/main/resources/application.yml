@@ -15,3 +15,8 @@ spring:
   sql:
     init:
       platform: mysql
+
+cloud:
+  name: ${CLOUD_NAME}
+  secret: ${CLOUD_SECRET}
+  key: ${CLOUD_KEY}
