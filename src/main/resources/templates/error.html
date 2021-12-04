@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:insert="fragments/base :: headAttributes"></th:block>
+        <title>Error Page</title>
+    </head>
+    <body>
+        <div th:insert="fragments/base :: navigation"></div>
+        <div th:insert="fragments/base :: header"></div>
+
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-5">
+                <div class="col text-center">
+                    <i class="bi bi-emoji-frown" style="font-size: 50px;">
+                        <h2 th:text="${errorMsg}"></h2>
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div th:insert="fragments/base :: addPostButton"></div>
+        <div th:insert="fragments/base :: footer"></div>
+    </body>
+    <th:block th:replace="fragments/base :: scripts"></th:block>
+</html>

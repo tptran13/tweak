@@ -30,12 +30,12 @@ public class UserDataLoader implements CommandLineRunner
 //        user.setEnabled(true);
 //        userRepo.save(user);
 
-//        CreateProfile user1 = new CreateProfile("Hinata", "Hyuga", "04/16/1996", "user2@yahoo.com",
+//        CreateProfile user2 = new CreateProfile("Hinata", "Hyuga", "04/16/1996", "user2@yahoo.com",
 //                "user2", passwordEncoder.encode("Password2"));
-//        user1.setRoles(Set.of(CreateProfile.Role.ROLE_USER));
-//        user1.setEnabled(true);
-//        userRepo.save(user1);
-
+//        user2.setRoles(Set.of(CreateProfile.Role.ROLE_USER));
+//        user2.setEnabled(true);
+//        userRepo.save(user2);
+//
 //        CreateProfile user3 = new CreateProfile("Itachi", "Uchiha", "04/04/1990", "user3@yahoo.com",
 //                "user3", passwordEncoder.encode("Password3"));
 //        user3.setRoles(Set.of(CreateProfile.Role.ROLE_USER));

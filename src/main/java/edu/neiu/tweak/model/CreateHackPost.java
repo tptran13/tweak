@@ -1,4 +1,4 @@
-//***************** This is the blog/post class *****************
+//***************** This is the BLOG/POST class *****************
 package edu.neiu.tweak.model;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class CreateHackPost
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //keep id on top!!!!
 
     @NotBlank(message = "Title is required")
@@ -29,9 +29,9 @@ public class CreateHackPost
     private LocalDateTime modified;
 
     //mapping relationship, getter & setter has been created
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id")
-    private CreateProfile user;
+    private CreateProfile create_profile_user;
 
     public CreateHackPost(){}
 
@@ -112,14 +112,14 @@ public class CreateHackPost
         this.modified = modified;
     }
 
-    public CreateProfile getUser()
+    public CreateProfile getCreate_profile_user()
     {
-        return user;
+        return create_profile_user;
     }
 
-    public void setUser(CreateProfile user)
+    public void setCreate_profile_user(CreateProfile create_profile_user)
     {
-        this.user = user;
+        this.create_profile_user = create_profile_user;
     }
 
     @PrePersist

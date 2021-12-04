@@ -1,7 +1,7 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -20,3 +20,8 @@ cloud:
   name: ${CLOUD_NAME}
   secret: ${CLOUD_SECRET}
   key: ${CLOUD_KEY}
+
+server:
+  error:
+    whitelabel:
+      enabled: false
