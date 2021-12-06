@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class CreateHackPost
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id; //keep id on top!!!!
 
     @NotBlank(message = "Title is required")
@@ -29,9 +29,9 @@ public class CreateHackPost
     private LocalDateTime modified;
 
     //mapping relationship, getter & setter has been created
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "user_id")
-    private CreateProfile create_profile_user;
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "user_id")
+//    private CreateProfile create_profile_user;
 
     public CreateHackPost(){}
 
@@ -112,15 +112,15 @@ public class CreateHackPost
         this.modified = modified;
     }
 
-    public CreateProfile getCreate_profile_user()
-    {
-        return create_profile_user;
-    }
-
-    public void setCreate_profile_user(CreateProfile create_profile_user)
-    {
-        this.create_profile_user = create_profile_user;
-    }
+//    public CreateProfile getCreate_profile_user()
+//    {
+//        return create_profile_user;
+//    }
+//
+//    public void setCreate_profile_user(CreateProfile create_profile_user)
+//    {
+//        this.create_profile_user = create_profile_user;
+//    }
 
     @PrePersist
     public void onCreate()

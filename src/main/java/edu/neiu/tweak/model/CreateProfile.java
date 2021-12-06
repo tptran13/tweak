@@ -20,7 +20,7 @@ import java.util.Set;
 public class CreateProfile implements UserDetails
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @NotBlank(message = "First name is required")
@@ -51,8 +51,8 @@ public class CreateProfile implements UserDetails
     private LocalDateTime modified;
 
     //mapping relationship, getter & setter have been created
-    @OneToMany(mappedBy = "create_profile_user", cascade = CascadeType.ALL)
-    private Set<CreateHackPost> posts = new HashSet<>();
+//    @OneToMany(mappedBy = "create_profile_user", cascade = CascadeType.ALL)
+//    private Set<CreateHackPost> posts = new HashSet<>();
 
     private boolean enabled;
     private boolean accountNonExpired;
@@ -176,18 +176,18 @@ public class CreateProfile implements UserDetails
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
-    public Set<CreateHackPost> getPosts()
-    {
-        return posts;
-    }
-
-    public void setPosts(Set<CreateHackPost> posts)
-    {
-        this.posts = posts;
-
-        for(CreateHackPost post : posts)
-            post.setCreate_profile_user(this);
-    }
+//    public Set<CreateHackPost> getPosts()
+//    {
+//        return posts;
+//    }
+//
+//    public void setPosts(Set<CreateHackPost> posts)
+//    {
+//        this.posts = posts;
+//
+//        for(CreateHackPost post : posts)
+//            post.setCreate_profile_user(this);
+//    }
 
     public void setRoles(Collection<Role> roles)
     {
