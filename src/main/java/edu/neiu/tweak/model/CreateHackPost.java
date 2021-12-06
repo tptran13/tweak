@@ -29,9 +29,9 @@ public class CreateHackPost
     private LocalDateTime modified;
 
     //mapping relationship, getter & setter has been created
-//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "user_id")
-//    private CreateProfile create_profile_user;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id")
+    private CreateProfile profile;
 
     public CreateHackPost(){}
 
@@ -112,15 +112,15 @@ public class CreateHackPost
         this.modified = modified;
     }
 
-//    public CreateProfile getCreate_profile_user()
-//    {
-//        return create_profile_user;
-//    }
-//
-//    public void setCreate_profile_user(CreateProfile create_profile_user)
-//    {
-//        this.create_profile_user = create_profile_user;
-//    }
+    public CreateProfile getProfile()
+    {
+        return profile;
+    }
+
+    public void setProfile(CreateProfile profile)
+    {
+        this.profile = profile;
+    }
 
     @PrePersist
     public void onCreate()

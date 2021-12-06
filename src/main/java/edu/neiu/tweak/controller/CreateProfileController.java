@@ -1,4 +1,4 @@
-//****************** User Controller ******************
+//****************** User Registration Controller ******************
 package edu.neiu.tweak.controller;
 
 import edu.neiu.tweak.data.CreateProfileRepository;

@@ -51,8 +51,8 @@ public class CreateProfile implements UserDetails
     private LocalDateTime modified;
 
     //mapping relationship, getter & setter have been created
-//    @OneToMany(mappedBy = "create_profile_user", cascade = CascadeType.ALL)
-//    private Set<CreateHackPost> posts = new HashSet<>();
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    private Set<CreateHackPost> posts = new HashSet<>();
 
     private boolean enabled;
     private boolean accountNonExpired;
@@ -84,6 +84,11 @@ public class CreateProfile implements UserDetails
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
+    }
+
+    public long getId()
+    {
+        return id;
     }
 
     public String getFirstName()
@@ -176,18 +181,18 @@ public class CreateProfile implements UserDetails
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
-//    public Set<CreateHackPost> getPosts()
-//    {
-//        return posts;
-//    }
-//
-//    public void setPosts(Set<CreateHackPost> posts)
-//    {
-//        this.posts = posts;
-//
-//        for(CreateHackPost post : posts)
-//            post.setCreate_profile_user(this);
-//    }
+    public Set<CreateHackPost> getPosts()
+    {
+        return posts;
+    }
+
+    public void setPosts(Set<CreateHackPost> posts)
+    {
+        this.posts = posts;
+
+        for(CreateHackPost post : posts)
+            post.setProfile(this);
+    }
 
     public void setRoles(Collection<Role> roles)
     {

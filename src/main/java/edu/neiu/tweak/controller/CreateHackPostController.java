@@ -3,9 +3,12 @@ package edu.neiu.tweak.controller;
 
 import com.cloudinary.utils.ObjectUtils;
 import edu.neiu.tweak.config.CloudinaryConfig;
+import edu.neiu.tweak.data.CreateProfileRepository;
 import edu.neiu.tweak.data.HackPostRepository;
 import edu.neiu.tweak.model.CreateHackPost;
+import edu.neiu.tweak.model.CreateProfile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -54,7 +57,7 @@ public class CreateHackPostController
 
     @PostMapping
     public String handleHackPostForm(@Valid @ModelAttribute("addPost") CreateHackPost post, Errors error,
-                                     @RequestParam("imageFile")MultipartFile imageFile)
+                                     @RequestParam("imageFile")MultipartFile imageFile, @AuthenticationPrincipal CreateProfile profile)
     {
         if(error.hasErrors())
         {
@@ -64,8 +67,13 @@ public class CreateHackPostController
         //import ObjectUtils from cloudinary util
         try
         {
+
             Map<String, Object> uploaded = this.cloudConfig.upload(imageFile.getBytes(), ObjectUtils.asMap("resource", "auto"));
+            if(uploaded.get("url") == null || profile == null)
+                return "add-createhackpost";
+
             post.setImage(uploaded.get("url").toString());
+            post.setProfile(profile);
             this.postRepo.save(post);
         }
         catch (IOException e)
