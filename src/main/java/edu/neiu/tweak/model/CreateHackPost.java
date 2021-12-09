@@ -33,12 +33,16 @@ public class CreateHackPost
     @JoinColumn(name = "user_id")
     private CreateProfile profile;
 
-    public CreateHackPost(){}
+    public CreateHackPost(){
+        onCreate();
+        this.date = getCreated().toString();
+    }
 
-    public CreateHackPost(String title, String date, String description)
+    public CreateHackPost(String title, String description)
     {
         this.title = title;
-        this.date = date;
+        onCreate();
+        this.date = getCreated().toString();
         this.description = description;
     }
 
