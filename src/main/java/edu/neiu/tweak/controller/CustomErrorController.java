@@ -26,8 +26,9 @@ public class CustomErrorController implements ErrorController
 
             if(statusCode == HttpStatus.NOT_FOUND.value())
                 message = "Sorry, we could not find that page.";
-
-            if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value())
+            else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value())
+                message = "Oops, something went wrong. We are fixing it";
+            else
                 message = "Oops, something went wrong. Please try again later";
         }
 

@@ -7,6 +7,7 @@ import edu.neiu.tweak.model.CreateHackPost;
 import edu.neiu.tweak.model.CreateProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +51,13 @@ public class CreateProfileController
         return "/profile-registered";
     }
 
+    private void updateOriginalProfile(CreateProfile update)
+    {
+        update.setFirstName(update.getFirstName());
+        update.setLastName((update.getLastName()));
+        update.setEmail(update.getEmail());
+    }
+
     @PostMapping
     public String handleNewProfileForm(@ModelAttribute("addProfile") @Valid CreateProfile profile, Errors error, RedirectAttributes attrs)
     {
@@ -60,15 +68,16 @@ public class CreateProfileController
 
         try
         {
-            //profile to get pass and encode it
+            //profile to get password and encode it
             profile.setPassword(passwordEncoder.encode(profile.getPassword()));
             profile.setEnabled(true);
             profile.setRoles(Set.of(CreateProfile.Role.ROLE_USER));
             this.profileRepo.save(profile);
         }
-        catch (DataIntegrityViolationException err)
+        catch(DataIntegrityViolationException err)
         {
-            error.rejectValue("email", "invalidEmail", "Email is taken, please try another one.");
+            error.rejectValue("email", "invalidEmail", "Email or username is unavailable");
+            error.rejectValue("username", "invalidUsername", "Email or username is unavailable");
             return "add-createprofile";
         }
 
