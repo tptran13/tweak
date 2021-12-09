@@ -48,7 +48,7 @@ public class CreateProfileController
     public String displayThankYou(@ModelAttribute("name") Object attr, Model model)
     {
         model.addAttribute("fullname", attr);
-        return "/profile-registered";
+        return "profile-registered";
     }
 
     private void updateOriginalProfile(CreateProfile update)
@@ -59,7 +59,7 @@ public class CreateProfileController
     }
 
     @PostMapping
-    public String handleNewProfileForm(@ModelAttribute("addProfile") @Valid CreateProfile profile, Errors error, RedirectAttributes attrs)
+    public String handleNewProfileForm(@ModelAttribute("addProfile") @Valid CreateProfile profile, Errors error)
     {
         if(error.hasErrors())
         {
@@ -81,7 +81,6 @@ public class CreateProfileController
             return "add-createprofile";
         }
 
-        attrs.addFlashAttribute("name", profile.getFirstName() + " " + profile.getLastName());
         return "redirect:createprofile/welcome";
     }
 }
