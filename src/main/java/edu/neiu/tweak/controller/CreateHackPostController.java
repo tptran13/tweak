@@ -69,7 +69,7 @@ public class CreateHackPostController
         {
 
             Map<String, Object> uploaded = this.cloudConfig.upload(imageFile.getBytes(), ObjectUtils.asMap("resource", "auto"));
-            if(uploaded.get("url") == null || profile == null)
+            if(profile == null)
                 return "add-createhackpost";
 
             post.setImage(uploaded.get("url").toString());
@@ -97,13 +97,15 @@ public class CreateHackPostController
         CreateHackPost originalPost = this.postRepo.findById(id).get();
         updateOriginalPost(originalPost, post);
         this.postRepo.save(originalPost);
+
         return "redirect:/viewposts";
     }
 
     private void updateOriginalPost(CreateHackPost original, CreateHackPost update)
     {
         original.setTitle(update.getTitle());
-        original.setDate((update.getDate()));
+        update.onUpdate();
+        original.setDate((update.getModified().toString()));
         original.setDescription(update.getDescription());
     }
 }

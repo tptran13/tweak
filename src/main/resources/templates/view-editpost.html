@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <th:block th:insert="fragments/base-logged-in :: headAttributes"></th:block>
+        <th:block th:insert="fragments/base :: headAttributes"></th:block>
         <title>My Post</title>
     </head>
     <body>
@@ -30,21 +30,6 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-8 col-md-3">
-                        <label for="date">Date Created:</label>
-                        <input class="form-control" id="date" type="date" th:field="*{date}">
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row justify-content-center mb-3">
-                    <div class="col-8 col-md-3">
-                        <span class="text-danger small" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
                 <div class="row justify-content-center mb-3">
                     <div class="col-8 col-md-3">
                         <label for="description">Description:</label>
@@ -56,8 +41,21 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-8 col-md-3 mb-3">
-                        <label for="upload">Upload:</label>
-                        <input class="form-control mb-4" id="upload" type="file">
+                        <label for="image" class="form-label">Upload an image</label>
+                        <input class="form-control mb-4" id="image" type="file" name="imageFile">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-8 col-md-3">
+                        <span class="text-danger small" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-8 col-md-3 mb-3">
                         <input class="btn btn-primary w-100" type="submit" value="Save Changes">
                         <a class="btn btn-danger mt-2 w-100" th:href="@{/viewposts}">Cancel</a>
                     </div>
